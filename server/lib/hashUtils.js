@@ -21,7 +21,7 @@ exports.createHash = (data, salt = '') => {
 /**
  * Compares a value and a salt with a previously hashed value.
  * @param {string} attempted - The attempted value.
- * @param {string} stored - The previous hash value.
+ * @param {string} stored - The previous hash value. -> hw: previous hash value?
  * @param {string} salt - The salt.
  * @returns {boolean} A boolean indicating if the attempted value
  * matches the stored value.

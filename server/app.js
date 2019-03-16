@@ -5,8 +5,9 @@ const partials = require('express-partials');
 const bodyParser = require('body-parser');
 const Auth = require('./middleware/auth');
 const models = require('./models');
-
-const app = express();
+const db = require('./db/index.js'); //imported database ourselves
+const app = express(); //hw: app is a javascript function, meant to be passed to Node's http servers
+// as a callback to handle requests
 
 app.set('views', `${__dirname}/views`);
 app.set('view engine', 'ejs');
@@ -19,7 +20,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/', 
 (req, res) => {
-  res.render('index');
+  console.log('hello');
+  res.render('index');  //hw: fred said these render functions will basically create your html
 });
 
 app.get('/create', 
@@ -77,7 +79,41 @@ app.post('/links',
 /************************************************************/
 // Write your authentication routes here
 /************************************************************/
+app.post('/signup', (req, res, next) => {
+  var inputUsername = req.body.username;
+  db.query('SELECT username from users', (err, data) => {
+    if (err) { throw err };
+    console.log('username: ', data[0].username) 
+    console.log('data :', data)
+    // what does data look like?
+    //  side question: why is buddy in the table right now
+    //  and why do we skipping 2?????????
 
+    // if no error, we want to compare the table usernames to inputUsername
+      // do this for each username in the table
+      // if one of them matched
+        // then console.log (this username already taken);
+        // and we want to redirect to signup
+      // if none match, we create.
+    
+/* AFTER DINNER
+    we know what our data looks like and how to access the username
+    so need to implement username checking (possibly with for loop)
+
+*/
+// 
+
+    
+  });
+
+
+  models.Users.create(req.body);
+  done();
+  // .then(function(result) {
+  // })
+  console.log('hey buddy', username, password);
+  console.log('')
+})
 
 
 /************************************************************/
