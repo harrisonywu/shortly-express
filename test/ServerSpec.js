@@ -224,7 +224,7 @@ describe('', function() {
         done(error);
       });
     });
-
+//9
     it('Logs in existing users', function(done) {
       var options = {
         'method': 'POST',
@@ -234,7 +234,7 @@ describe('', function() {
           'password': 'Samantha'
         }
       };
-
+//10
       request(options, function(error, res, body) {
         if (error) { return done(error); }
         expect(res.headers.location).to.equal('/');

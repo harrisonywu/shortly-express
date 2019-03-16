@@ -81,10 +81,22 @@ app.post('/links',
 /************************************************************/
 app.post('/login', (req, res) => {
   var inputUsername = req.body.username;
+  var inputPassword = req.body.password;
+  
+  // getall grabs all record in the table that have a key username
+  // models.Users.getAll({username: inputUsername, password: inputPassword})
   models.Users.get({username: inputUsername})
   .then(function (result) {
     if (result) {
-      res.redirect('/');
+        if (models.Users.compare(inputPassword, result.password, result.salt)) {
+          res.redirect('/');
+        } else {
+          res.redirect('/login');
+        }
+      // console.log('our result: ', result);
+      // console.log('our result username: ', result.username);
+      // console.log('our result password: ', result.password);
+      // res.redirect('/');
       //log them in
       // what does logging in mean?
       // render a page
