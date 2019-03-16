@@ -79,6 +79,9 @@ app.post('/links',
 /************************************************************/
 // Write your authentication routes here
 /************************************************************/
+app.get('/login', (req, res) => {
+  res.render('login')
+})
 app.post('/login', (req, res) => {
   var inputUsername = req.body.username;
   var inputPassword = req.body.password;
@@ -111,6 +114,11 @@ app.post('/login', (req, res) => {
 
 
 ////////////////////////////
+app.get('/signup', (req, res) => {
+  res.render('signup');
+})
+
+
 app.post('/signup', (req, res, next) => {
   var inputUsername = req.body.username;
   models.Users.get({username: inputUsername})
